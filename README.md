@@ -60,4 +60,38 @@ The project uses the IMDb dataset, which contains movie reviews labeled as posit
 2. Run the cells in the notebook to preprocess the data, train the model, and make predictions.
 
 ## Project Structure
+sentiment-analysis-project/
+│
+├── sentiment_analysis.ipynb # Jupyter Notebook containing the project code
+├── IMDB Dataset.csv # IMDb dataset (place your dataset here)
+├── saved_model.sav # Saved Logistic Regression model
+└── README.md # This README file
+
+
+## Model Training
+
+The model training process includes the following steps:
+
+1. **Loading the Dataset**: The IMDb dataset is loaded using Pandas.
+2. **Text Preprocessing**: The text data is transformed into TF-IDF features using `TfidfVectorizer`.
+3. **Model Training**: A Logistic Regression model is trained using `LogisticRegressionCV` with cross-validation.
+4. **Model Saving**: The trained model is saved using Pickle for future use.
+
+## Prediction
+
+To predict the sentiment of new text data:
+
+1. Define the `preprocess_and_predict` function to transform new texts and make predictions using the saved model.
+2. Use the `preprocess_and_predict` function to predict the sentiment of new reviews.
+
+```python
+def preprocess_and_predict(new_texts):
+    new_texts_tfidf = tfidf.transform(new_texts)
+    predictions = saved_clf.predict(new_texts_tfidf)
+    return predictions
+
+new_texts = ["It was perfect, perfect , down to the last minute details", "It is waste of money"]
+predictions = preprocess_and_predict(new_texts)
+print(f"Predictions: {predictions}")
+
 
